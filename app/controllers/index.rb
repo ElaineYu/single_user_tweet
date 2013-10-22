@@ -1,4 +1,16 @@
 get '/' do
-  # Look in app/views/index.erb
+
   erb :index
 end
+
+post '/' do
+  @tweet = Tweet.create(tweet: params[:tweet])
+  # params[:tweet]
+  @tweets = Tweet.all
+  erb :see_tweets
+end
+
+# post '/tweet_entry' do
+#   Tweet.create(tweet: params[:tweet])
+#   redirect '/'
+# end
