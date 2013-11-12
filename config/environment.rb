@@ -33,9 +33,17 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
 
+#configure with YAML, do not upload twitter.yaml file to github
+env_config = YAML.load_file(APP_ROOT.join('config', 'twitter.yaml'))
+
+env_config.each do |key, value|
+  ENV[key] = value
+end
+
+#Twitter configuration
 Twitter.configure do |config|
-    config.consumer_key = "CvYJhI8Z26tUjtrLa2eQ"
-    config.consumer_secret = "kImHEFFfZh9EHq0kIM3wXfCgvFmmdyUKZrKn3EYyp4"
-    config.oauth_token = "1064145246-6fqi3ZXmWGvl5EWF0jQA7RhM1RLKQvKZs0SHqZw"
-    config.oauth_token_secret = "9VGCc2GIdJvGZBSLNxHxnKTYIuymmglnQqwBadkjO6mhO"
+  config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
+  config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
+  config.oauth_token = ENV['TWITTER_OAUTH_TOKEN']
+  config.oauth_token_secret = ENV['TWITTER_OAUTH_TOKEN_SECRET']
 end

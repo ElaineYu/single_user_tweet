@@ -32,14 +32,11 @@ $(document).ready(function() {
     event.preventDefault();
     // make data equal to username field
     var form_value = this.tweet.value;
-    console.log(data);
+    console.log(form_value);
 
     var url = '/';
     var data = {tweet: form_value};
-
-
     $('.response').html("Waiting");
-
 
     // function(response) == what's returned from page
     $.post(url, data, function(response) {
